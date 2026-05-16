@@ -134,15 +134,13 @@
       .hero-sticky::before { display: none; }
       #wrapper { height: auto !important; }
       
-      /* IMAGEN DE FONDO GLOBAL PARA MÓVIL 
-         Aquí aplicamos tu imagen 'fondo-movil.jpg' a TODO el contenedor
-      */
+      /* IMAGEN DE FONDO GLOBAL PARA MÓVIL (EXPANDIDA DE PRINCIPIO A FIN) */
       #secHome {
         background-image: url('assets/fondo-movil.jpg');
-        background-size: 100% auto; /* Crece hacia abajo ocupando el 100% del ancho */
+        background-size: cover; /* ¡Aquí está la magia! Se expande hacia abajo sin deformarse */
         background-position: top center;
         background-repeat: no-repeat;
-        background-color: #05100a; /* Respaldo oscuro por si la página es más larga que la foto */
+        background-attachment: scroll; /* Sigue el ritmo del dedo al deslizar */
       }
       
       /* Encendemos los bloques móviles asegurándonos que sean TRANSPARENTES */
