@@ -66,7 +66,7 @@
     .nav-searchbar input::placeholder{color:rgba(0,0,0,0.3);}
     .nav-searchbar-close{background:none;border:none;cursor:pointer;color:rgba(0,0,0,0.4);font-size:20px;}
 
-    /* PARALLAX */
+    /* PARALLAX PC (OCULTO EN MÓVIL VÍA CSS) */
     .hero-wrapper{position:relative;}
     .hero-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:#F5F1E8;}
     .hero-sticky::before{content:'';position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,rgba(245,241,232,0.18) 0%,transparent 100%);z-index:95;pointer-events:none;}
@@ -81,14 +81,17 @@
     .layer-final{height:100%;z-index:50;}
     .layer-final img{width:100%;height:100%;object-fit:cover;object-position:bottom center;}
 
-    /* STORY OVERLAYS */
+    /* STORY OVERLAYS PC */
     .story-overlay{position:absolute;inset:0;z-index:55;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28vw;opacity:0;pointer-events:none;transition:opacity 0.4s ease;text-align:center;}
     .story-tag{font-family:'Cinzel',serif;font-size:clamp(1rem,1.6vw,1.4rem);color:#fff;letter-spacing:3px;text-transform:uppercase;margin:0 0 var(--space-4);text-shadow:0 2px 12px rgba(0,0,0,0.6);}
     .story-title{font-family:'Poppins',sans-serif;font-weight:500;font-size:clamp(1.2rem,2vw,1.75rem);color:#fff;line-height:1.6;margin:0;max-width:600px;text-shadow:0 2px 14px rgba(0,0,0,0.65);}
     .story-sub{font-family:'Poppins',sans-serif;font-weight:300;font-size:clamp(12px,1.1vw,14px);color:rgba(255,255,255,0.8);line-height:1.9;margin:var(--space-3) auto 0;max-width:540px;text-shadow:0 1px 10px rgba(0,0,0,0.6);}
     .story-btn{margin-top:var(--space-6);padding:14px 40px;background:var(--verde-esmeralda);border:none;border-radius:4px;color:white;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.3s;box-shadow:0 4px 20px rgba(0,143,69,0.5);}
     .story-btn:hover{background:var(--verde-tropical);}
-    @media(max-width:768px){.story-overlay{padding:0 8vw;}.story-title{font-size:1.2rem;}.story-sub{font-size:13px;}}
+
+    /* BLOQUES NATIVOS MÓVILES (OCULTOS EN PC) */
+    .mobile-only-hero { display: none; }
+    .mobile-only-story { display: none; }
 
     /* CARDS HOME */
     .hero-content{position:absolute;top:0;left:0;right:0;bottom:0;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--space-9) var(--grid-margin-desktop);opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;pointer-events:none;}
@@ -106,14 +109,14 @@
     .exp-btn{display:block;margin:var(--space-6) auto 0;padding:13px 32px;background:var(--verde-selva);color:white;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:background 0.3s;width:fit-content;}
     .exp-btn:hover{background:var(--verde-esmeralda);}
 
-    /* RESPONSIVE MÓVIL (NAV Y CARDS) */
+    /* RESPONSIVE MÓVIL (ARQUITECTURA HÍBRIDA) */
     @media(max-width:1024px){
       .exp-cards{grid-template-columns:repeat(2,1fr);}
       .hero-content{padding:var(--space-8) var(--grid-margin-tablet);}
       nav{padding:0 var(--grid-margin-tablet);}
     }
     @media(max-width:768px){
-      /* Barra Navegación Móvil */
+      /* Barra Navegación Móvil Compacta */
       nav{padding:0 var(--grid-margin-mobile); grid-template-columns: 1fr auto 1fr;}
       .nav-left{gap:0; justify-content:flex-start;}
       .nav-right{gap:12px; justify-content:flex-end;}
@@ -121,7 +124,64 @@
       .nav-reserve{padding:8px 14px; font-size:9px; letter-spacing:1px;}
       .nav-center img{height:24px;}
       
-      .hero-content{padding:0;justify-content:center;}
+      /* DEGRADACIÓN ELEGANTE: Apagamos el Parallax Pesado */
+      .layer, .story-overlay { display: none !important; }
+      .hero-sticky {
+        position: relative !important; 
+        height: auto !important; 
+        background: transparent !important;
+      }
+      .hero-sticky::before { display: none; }
+      #wrapper { height: auto !important; }
+      
+      /* Encendemos la versión Landing Ligera */
+      .mobile-only-hero {
+        display: block;
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        background: var(--verde-selva);
+      }
+      .mobile-only-hero img.m-bg {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: bottom center;
+      }
+      .mobile-only-hero .m-logo {
+        position: absolute;
+        top: 25vh; left: 0; width: 100%;
+        display: flex; justify-content: center;
+        z-index: 10;
+      }
+      .mobile-only-hero .m-logo img { width: clamp(200px, 60vw, 300px); object-fit: contain; }
+
+      .mobile-only-story {
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+        padding: 5rem var(--grid-margin-mobile);
+        background: linear-gradient(to bottom, #005C33, #003a20);
+        text-align: center;
+      }
+      
+      /* Ajuste de los bloques globales a flujo normal vertical */
+      .hero-content {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: all !important;
+        padding: 4rem 0 !important;
+        background: #003a20; /* Conecta con el gradiente de arriba */
+        justify-content:flex-start;
+      }
+      .gallery-overlay {
+        position: relative !important;
+        opacity: 1 !important;
+        pointer-events: all !important;
+        padding: 4rem 0 2rem !important;
+        background: #003a20;
+      }
+
       .hero-content-label{font-size:9px;margin-bottom:var(--space-2);}
       .hero-content-title{font-size:1.4rem;margin-bottom:var(--space-4);}
       .exp-cards{grid-template-columns:repeat(4, 68vw); gap:16px; overflow-x:auto; scroll-snap-type: x mandatory; padding:0 var(--grid-margin-mobile) var(--space-3); margin:0; width:100%; scrollbar-width:none; -webkit-overflow-scrolling:touch;}
@@ -365,18 +425,61 @@
   </div>
 
   <div id="secHome">
+    
+    <div class="mobile-only-hero">
+      <div class="m-logo"><img src="assets/logo-blanco.png" alt="Victoria Regia"></div>
+      <img class="m-bg" src="assets/fondo-movil.jpg" alt="Santuario Amazonas">
+      <div class="scroll-indicator" style="bottom: 2rem;">
+        <div class="scroll-mouse"></div>
+        <span>Scroll</span>
+      </div>
+    </div>
+    <div class="mobile-only-story">
+      <div class="m-story-block">
+        <p class="story-tag">Amazonas Colombiano</p>
+        <h3 class="story-title">¿Sabías que el Amazonas colombiano ocupa el 42% del territorio nacional y produce el oxígeno que respira medio planeta?</h3>
+        <p class="story-sub">No es una metáfora. Es, literalmente, el pulmón del mundo.</p>
+      </div>
+      <div class="m-story-block">
+        <p class="story-tag">Biodiversidad</p>
+        <h3 class="story-title">Solo aquí existen más de 17.500 especies de flora y 3.800 de fauna registradas.</h3>
+        <p class="story-sub">Y los científicos calculan que aún quedan millones por descubrir.</p>
+      </div>
+      <div class="m-story-block">
+        <p class="story-tag">Fauna</p>
+        <h3 class="story-title">El jaguar, el delfín rosado, la nutria gigante, el manatí.</h3>
+        <p class="story-sub">Aquí no son símbolos. Son vecinos.</p>
+      </div>
+      <div class="m-story-block">
+        <p class="story-tag">La Selva</p>
+        <h3 class="story-title">En ningún otro lugar del planeta el tiempo le pertenece aún a la naturaleza.</h3>
+        <p class="story-sub">La Amazonía colombiana no es un paisaje — es un organismo vivo que respira, crece y, si te dejas, te transforma.</p>
+      </div>
+      <div class="m-story-block">
+        <p class="story-tag">Origen</p>
+        <h3 class="story-title">Por eso nació Victoria Regia.</h3>
+        <p class="story-sub">Un santuario donde la naturaleza sigue siendo la protagonista — y el ser humano, un invitado privilegiado.</p>
+      </div>
+      <div class="m-story-block">
+        <p class="story-tag">Te Esperamos</p>
+        <h3 class="story-title">Ofrecemos una experiencia que pocas personas en el mundo han tenido.</h3>
+        <p class="story-sub">La selva te espera, y nosotros estamos aquí para acompañarte en cada paso.</p>
+        <button class="story-btn" onclick="document.querySelector('.nav-reserve').click()">Contáctanos</button>
+      </div>
+    </div>
+
     <div class="hero-wrapper" id="home">
       <div class="hero-sticky">
         <div class="layer layer-logo" id="layerLogo"><img src="assets/logo-verde.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
         <div class="layer layer-mountains" id="layerMountains"><img src="assets/Montan_as.png" alt=""></div>
         <div class="layer lf lf1" id="lf1"><img src="assets/capa1.png" alt=""></div>
-        <div class="layer lf lf2" id="lf2"><img src="assets/capa2.png" alt=""></div>
-        <div class="layer lf lf3" id="lf3"><img src="assets/capa3.png" alt=""></div>
-        <div class="layer lf lf4" id="lf4"><img src="assets/capa4.png" alt=""></div>
-        <div class="layer lf lf5" id="lf5"><img src="assets/capa5.png" alt=""></div>
-        <div class="layer lf lf6" id="lf6"><img src="assets/capa6.png" alt=""></div>
-        <div class="layer lf lf7" id="lf7"><img src="assets/capa7.png" alt=""></div>
-        <div class="layer layer-final" id="layerFinal"><img src="assets/Final.png" alt=""></div>
+        <div class="layer lf lf2" id="lf2" loading="lazy"><img src="assets/capa2.png" alt=""></div>
+        <div class="layer lf lf3" id="lf3" loading="lazy"><img src="assets/capa3.png" alt=""></div>
+        <div class="layer lf lf4" id="lf4" loading="lazy"><img src="assets/capa4.png" alt=""></div>
+        <div class="layer lf lf5" id="lf5" loading="lazy"><img src="assets/capa5.png" alt=""></div>
+        <div class="layer lf lf6" id="lf6" loading="lazy"><img src="assets/capa6.png" alt=""></div>
+        <div class="layer lf lf7" id="lf7" loading="lazy"><img src="assets/capa7.png" alt=""></div>
+        <div class="layer layer-final" id="layerFinal" loading="lazy"><img src="assets/Final.png" alt=""></div>
 
         <div class="story-overlay" id="s2">
           <p class="story-tag">Amazonas Colombiano</p>
@@ -520,7 +623,7 @@
         </div>
       </div>
 
-      <div class="scroll-indicator" id="scrollIndicator">
+      <div class="scroll-indicator" id="scrollIndicatorPc">
         <div class="scroll-mouse"></div>
         <span>Scroll</span>
       </div>
@@ -767,11 +870,17 @@
     navBack.addEventListener('click', goToHome);
     drawerHome.addEventListener('click', e => { e.preventDefault(); goToHome(); closeDrawer(); });
     drawerExpLnk.addEventListener('click', e => { e.preventDefault(); goToExp(null); closeDrawer(); });
+    
+    // Asignar el botón de contacto de la historia en desktop
+    const storyContactBtn = document.getElementById('storyContactBtn');
+    if (storyContactBtn) {
+      storyContactBtn.addEventListener('click', () => {
+        document.querySelector('.nav-reserve').click();
+      });
+    }
+
     document.querySelectorAll('.exp-card[data-exp]').forEach(card => {
       card.addEventListener('click', () => goToExp('exp-' + card.dataset.exp));
-    });
-    document.getElementById('storyContactBtn').addEventListener('click', () => {
-      document.querySelector('.nav-reserve').click();
     });
 
     // Scroll directo a galería
@@ -779,7 +888,12 @@
       function doScroll() {
         const vh = window.innerHeight;
         const isMobile = window.innerWidth <= 768;
-        const capaDur = isMobile ? vh*0.45 : vh*0.9;
+        if(isMobile) {
+          const el = document.getElementById('galleryOverlay');
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+          return;
+        }
+        const capaDur = vh*0.9;
         const capa2Start = vh*1.2;
         const pausaEnd = capa2Start + 6*capaDur + vh*1.2;
         window.scrollTo({top: pausaEnd + vh*0.5, behavior:'smooth'});
@@ -792,7 +906,6 @@
       }
     }
 
-    // Función scroll a sección
     function scrollToSection(id) {
       const inHome = secHome.style.display !== 'none' && secExp.classList.contains('active') === false;
       if (!inHome) {
@@ -831,7 +944,6 @@
     document.querySelectorAll('.footer-exp-link').forEach(a => {
       a.addEventListener('click', e => { e.preventDefault(); goToExp('exp-' + a.dataset.exp); });
     });
-
     document.querySelectorAll('.exp-footer-home').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goToHome(); }));
     document.querySelectorAll('.exp-footer-exp').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goToExp(null); window.scrollTo({top:0,behavior:'instant'}); }));
     document.querySelectorAll('.exp-footer-gal').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goToHome(); setTimeout(scrollToGallery, 80); }));
@@ -841,7 +953,7 @@
   </script>
 
   <script>
-    /* PARALLAX OPTIMIZADO PARA MÓVIL */
+    /* PARALLAX PC (CON BYPASS PARA MÓVIL) */
     const wrapper     = document.getElementById('home');
     const logo        = document.getElementById('layerLogo');
     const mountains   = document.getElementById('layerMountains');
@@ -869,35 +981,44 @@
     function onScroll(){
       const s=smoothY,vh=window.innerHeight;
       const isMobile=window.innerWidth<=768;
-      const capaDur=isMobile?vh*0.45:vh*0.9; /* Menos scroll en móvil */
 
       if(!navbar.classList.contains('exp-mode'))
         navbar.classList.toggle('scrolled',s>60);
 
-      const logoFade=clamp(1-s/(vh*0.2),0,1);
-      logo.style.opacity=logoFade;
-      logo.style.transform=`translateY(${clamp(s/(vh*0.2),0,1)*-3}vh)`;
+      // Si es móvil, cortamos la ejecución de matemáticas pesadas de inmediato.
+      if(isMobile) return;
 
+      const logoFade=clamp(1-s/(vh*0.2),0,1);
+      if(logo) {
+        logo.style.opacity=logoFade;
+        logo.style.transform=`translateY(${clamp(s/(vh*0.2),0,1)*-3}vh)`;
+      }
+
+      const capaDur=vh*0.9;
       const capa2Start=vh*1.2;
       const showP=clamp((s-vh*0.15)/(vh*0.13),0,1);
       const hideP=clamp((s-capa2Start)/(vh*0.25),0,1);
       const op=showP*(1-hideP);
-      heroContent.style.opacity=op;
-      heroContent.style.transform=`translateY(${(1-showP)*16}px)`;
-      heroContent.style.pointerEvents=op>0.1?'all':'none';
+      
+      if(heroContent) {
+        heroContent.style.opacity=op;
+        heroContent.style.transform=`translateY(${(1-showP)*16}px)`;
+        heroContent.style.pointerEvents=op>0.1?'all':'none';
+      }
 
       const syncP=prog(s,0,vh*1.2);
-      mountains.style.transform=`translateY(${-syncP*100}%)`;
-      layers[0].style.transform=`translateY(${(1-syncP)*100}%)`;
+      if(mountains) mountains.style.transform=`translateY(${-syncP*100}%)`;
+      if(layers[0]) layers[0].style.transform=`translateY(${(1-syncP)*100}%)`;
 
       for(let i=1;i<=6;i++){
+        if(!layers[i]) continue;
         const st=capa2Start+(i-1)*capaDur;
         layers[i].style.transform=`translateY(${ty(prog(s,st,st+capaDur))}%)`;
       }
 
       const pausaEnd=capa2Start+6*capaDur+vh*1.2;
-      const finalDur=isMobile?vh*0.6:vh*0.9;
-      finalL.style.transform=`translateY(${ty(prog(s,pausaEnd,pausaEnd+finalDur))}%)`;
+      const finalDur=vh*0.9;
+      if(finalL) finalL.style.transform=`translateY(${ty(prog(s,pausaEnd,pausaEnd+finalDur))}%)`;
 
       const galStart = pausaEnd;
       const galInP   = clamp((s - galStart) / (finalDur * 0.3), 0, 1);
@@ -921,9 +1042,10 @@
         {start:capa2Start+5*capaDur,  end:capa2Start+6*capaDur+vh*1.2},
       ];
       stories.forEach((el,i)=>{
+        if(!el) return;
         if(!storiesActive){
           el.style.opacity=0;
-          el.style.pointerEvents='none'; // Fix Botón fantasma
+          el.style.pointerEvents='none';
           return;
         }
         const{start,end}=storyDefs[i];
@@ -932,15 +1054,22 @@
         const outP=clamp((s-(start+dur*0.60))/(dur*0.15),0,1);
         const overlayOp=inP*(1-outP);
         el.style.opacity=overlayOp;
-        el.style.pointerEvents=overlayOp>0.1?'all':'none'; // Fix Botón fantasma
+        el.style.pointerEvents=overlayOp>0.1?'all':'none';
       });
     }
 
     function setWrapperHeight(){
       const vh=window.innerHeight;
       const isMobile=window.innerWidth<=768;
-      const cDur=isMobile?vh*0.45:vh*0.9;
-      const fDur=isMobile?vh*0.6:vh*0.9;
+      
+      // En móvil, la altura se rige por el contenido natural, no por scroll matemático
+      if(isMobile) {
+        wrapper.style.height = 'auto';
+        return;
+      }
+      
+      const cDur=vh*0.9;
+      const fDur=vh*0.9;
       wrapper.style.height=(vh*0.2+vh*1.4+cDur*6+vh*1.2+fDur+vh*0.8+vh*0.5+vh)+'px';
     }
     setWrapperHeight();
@@ -983,7 +1112,6 @@
     let muted=false;
     audio.volume=0.4;
     
-    // Auto-play al primer roce o clic (Máximo permitido por navegadores)
     function startAudio(){
       audio.play().catch(()=>{});
       document.removeEventListener('click',startAudio);
@@ -999,10 +1127,14 @@
 
     const preloader=document.getElementById('preloader');
     const preloaderLogo=document.getElementById('preloader-logo');
-    const scrollIndicator=document.getElementById('scrollIndicator');
+    
     setTimeout(()=>preloaderLogo.classList.add('show'),300);
     setTimeout(()=>preloader.classList.add('hide'),3000);
-    window.addEventListener('scroll',()=>{scrollIndicator.style.opacity=window.scrollY>40?'0':'1';},{passive:true});
+    
+    window.addEventListener('scroll',()=>{
+      const scr = document.getElementById('scrollIndicatorPc');
+      if(scr) scr.style.opacity=window.scrollY>40?'0':'1';
+    },{passive:true});
   </script>
 
   <script>
@@ -1038,10 +1170,9 @@
     }
 
     function initCarousel() {
-      // En móvil usamos scroll-snap (deslizar nativo), en escritorio botones
       const track = document.getElementById('reviewsTrack');
       if(window.innerWidth <= 768) {
-        track.style.transform = 'none'; // Reseteamos por si se achicó la ventana desde escritorio
+        track.style.transform = 'none'; 
         return; 
       }
       
