@@ -83,11 +83,10 @@
 
     /* STORY OVERLAYS */
     .story-overlay{position:absolute;inset:0;z-index:55;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28vw;opacity:0;pointer-events:none;transition:opacity 0.4s ease;text-align:center;}
-    .story-overlay.s7{pointer-events:none;}
     .story-tag{font-family:'Cinzel',serif;font-size:clamp(1rem,1.6vw,1.4rem);color:#fff;letter-spacing:3px;text-transform:uppercase;margin:0 0 var(--space-4);text-shadow:0 2px 12px rgba(0,0,0,0.6);}
     .story-title{font-family:'Poppins',sans-serif;font-weight:500;font-size:clamp(1.2rem,2vw,1.75rem);color:#fff;line-height:1.6;margin:0;max-width:600px;text-shadow:0 2px 14px rgba(0,0,0,0.65);}
     .story-sub{font-family:'Poppins',sans-serif;font-weight:300;font-size:clamp(12px,1.1vw,14px);color:rgba(255,255,255,0.8);line-height:1.9;margin:var(--space-3) auto 0;max-width:540px;text-shadow:0 1px 10px rgba(0,0,0,0.6);}
-    .story-btn{margin-top:var(--space-6);padding:14px 40px;background:var(--verde-esmeralda);border:none;border-radius:4px;color:white;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;pointer-events:all;transition:background 0.3s;box-shadow:0 4px 20px rgba(0,143,69,0.5);}
+    .story-btn{margin-top:var(--space-6);padding:14px 40px;background:var(--verde-esmeralda);border:none;border-radius:4px;color:white;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background 0.3s;box-shadow:0 4px 20px rgba(0,143,69,0.5);}
     .story-btn:hover{background:var(--verde-tropical);}
     @media(max-width:768px){.story-overlay{padding:0 8vw;}.story-title{font-size:1.2rem;}.story-sub{font-size:13px;}}
 
@@ -102,7 +101,6 @@
     .exp-card-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.16,1,0.3,1);}
     .exp-card:hover .exp-card-img{transform:scale(1.05);}
     .exp-card-body{padding:var(--space-5) var(--space-5) var(--space-7);}
-    .exp-card-icon{display:none;}
     .exp-card-title{font-family:'Cinzel',serif;font-size:13px;color:white;margin-bottom:var(--space-3);letter-spacing:1px;}
     .exp-card-desc{font-family:'Poppins',sans-serif;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.7;}
     .exp-btn{display:block;margin:var(--space-6) auto 0;padding:13px 32px;background:var(--verde-selva);color:white;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:background 0.3s;width:fit-content;}
@@ -112,9 +110,11 @@
       .hero-content{padding:0;justify-content:center;}
       .hero-content-label{font-size:9px;margin-bottom:var(--space-2);}
       .hero-content-title{font-size:1.4rem;margin-bottom:var(--space-4);}
-      .exp-cards{grid-template-columns:repeat(4,72vw);gap:12px;overflow-x:auto;padding:0 var(--grid-margin-mobile) var(--space-3);margin:0;width:100%;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+      /* TAMAÑO REDUCIDO EN MÓVIL PARA EXPERIENCIAS */
+      .exp-cards{grid-template-columns:repeat(4, 68vw); gap:16px; overflow-x:auto; scroll-snap-type: x mandatory; padding:0 var(--grid-margin-mobile) var(--space-3); margin:0; width:100%; scrollbar-width:none; -webkit-overflow-scrolling:touch;}
       .exp-cards::-webkit-scrollbar{display:none;}
-      .exp-card-img-wrap{height:400px;}
+      .exp-card{scroll-snap-align: center;}
+      .exp-card-img-wrap{height: 260px;} 
       .exp-card-body{padding:var(--space-3) var(--space-3) var(--space-5);}
       .exp-card-title{font-size:11px;margin-bottom:var(--space-2);}
       .exp-card-desc{font-size:10px;line-height:1.6;}
@@ -140,57 +140,27 @@
     .gallery-overlay-label{font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:var(--space-2);}
     .gallery-overlay-title{font-family:'Cinzel',serif;font-size:clamp(1.4rem,2.5vw,2.2rem);color:#fff;font-weight:400;text-shadow:0 2px 16px rgba(0,0,0,0.5);}
 
-    /* GRID DESKTOP: 4 columnas × 3 filas = 12 items uniformes */
+    /* GRID DESKTOP: 4 columnas × 3 filas */
     .gallery-mosaic{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      grid-template-rows:repeat(3,1fr);
-      gap:6px;
-      width:100%;
-      max-width:1200px;
-      flex:1;
-      min-height:0;
+      display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);
+      gap:6px;width:100%;max-width:1200px;flex:1;min-height:0;
     }
     .gal-item{
-      overflow:hidden;border-radius:4px;
-      background:rgba(255,255,255,0.06);
-      position:relative;
-      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),
-                 box-shadow 0.35s ease,
-                 z-index 0s;
-      cursor:pointer;
+      overflow:hidden;border-radius:4px;background:rgba(255,255,255,0.06);position:relative;
+      transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),box-shadow 0.35s ease,z-index 0s;cursor:pointer;
     }
-    .gal-item:hover{
-      transform:translateY(-8px) scale(1.03);
-      box-shadow:0 20px 40px rgba(0,0,0,0.5);
-      z-index:10;
-    }
-    .gal-item img{
-      width:100%;height:100%;object-fit:cover;display:block;
-      transition:filter 0.4s ease;filter:brightness(0.8);
-    }
-    .gal-item img.loaded{display:block;}
-    .gallery-carousel-track .gc-item img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85);}
+    .gal-item:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 20px 40px rgba(0,0,0,0.5);z-index:10;}
+    .gal-item img{width:100%;height:100%;object-fit:cover;display:block;transition:filter 0.4s ease;filter:brightness(0.8);}
     .gal-item:hover img{filter:brightness(1);}
-    .gal-placeholder{
-      position:absolute;inset:0;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:6px;
-      pointer-events:none;
-    }
+    .gal-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;pointer-events:none;}
     .gal-placeholder svg{opacity:0.12;}
     .gal-placeholder span{font-family:'Poppins',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.15);}
 
-    /* CARRUSEL MOBILE */
+    /* CARRUSEL MOBILE (1 FILA SWIPEABLE) */
     .gallery-carousel{display:none;}
     .gallery-carousel-track{display:flex;gap:10px;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);}
-    .gallery-carousel-track .gc-item{
-      min-width:72vw;height:55vw;border-radius:8px;overflow:hidden;
-      background:rgba(255,255,255,0.06);flex-shrink:0;position:relative;
-    }
+    .gallery-carousel-track .gc-item{min-width:72vw;height:55vw;border-radius:8px;overflow:hidden;background:rgba(255,255,255,0.06);flex-shrink:0;position:relative;}
     .gallery-carousel-track .gc-item img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85);}
-    .gallery-carousel-nav{display:flex;justify-content:center;gap:var(--space-3);margin-top:var(--space-4);}
-    .gallery-carousel-nav button{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;font-size:15px;cursor:pointer;transition:background 0.3s;}
-    .gallery-carousel-nav button:hover{background:rgba(255,255,255,0.2);}
 
     @media(max-width:1024px){
       .gallery-overlay{padding:72px var(--grid-margin-tablet) var(--space-5);}
@@ -200,14 +170,12 @@
       .gallery-overlay{padding:60px 0 var(--space-5);justify-content:center;align-items:center;}
       .gallery-overlay-header{padding:0 var(--grid-margin-mobile);}
       .gallery-mosaic{display:none;}
-      .gallery-carousel{display:flex;flex-direction:column;gap:10px;width:100%;overflow:hidden;}
-      .gallery-carousel-row{overflow:hidden;width:100%;}
-      .gallery-carousel-track{display:flex;gap:10px;transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);}
-      .gallery-carousel-track .gc-item{min-width:72vw;height:48vw;border-radius:8px;overflow:hidden;background:rgba(255,255,255,0.06);flex-shrink:0;position:relative;}
-      .gallery-carousel-track .gc-item img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(0.85);}
-      .gallery-carousel-nav{display:flex;justify-content:center;gap:var(--space-3);margin-top:var(--space-4);padding:0 var(--grid-margin-mobile);}
-      .gallery-carousel-nav button{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;font-size:15px;cursor:pointer;transition:background 0.3s;}
-      .gallery-carousel-nav button:hover{background:rgba(255,255,255,0.2);}
+      
+      /* UNIFICADO EN 1 FILA DESLIZABLE */
+      .gallery-carousel { display:block; width:100%; overflow-x:auto; scroll-snap-type: x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-bottom:10px; }
+      .gallery-carousel::-webkit-scrollbar { display:none; }
+      .gallery-carousel-track { display:flex; gap:12px; width:max-content; padding:0 var(--grid-margin-mobile); }
+      .gallery-carousel-track .gc-item { width:80vw; height:60vw; scroll-snap-align: center; flex-shrink:0; }
     }
 
     /* RESEÑAS */
@@ -231,7 +199,15 @@
     .reviews-google-link{display:inline-block;margin-top:var(--space-6);color:rgba(255,255,255,0.3);font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:color 0.3s;}
     .reviews-google-link:hover{color:rgba(255,255,255,0.7);}
     @media(max-width:1024px){.reviews-section{padding:var(--space-9) var(--grid-margin-tablet);}}
-    @media(max-width:768px){.reviews-section{padding:var(--space-8) var(--grid-margin-mobile);}.review-card{min-width:78vw;max-width:78vw;}}
+    @media(max-width:768px){
+      .reviews-section{padding:var(--space-8) 0;} /* Removido padding lateral para scroll natural */
+      .reviews-rating-global{padding:0 var(--grid-margin-mobile);}
+      .reviews-track-wrap{overflow-x:auto; scroll-snap-type: x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding: 0 var(--grid-margin-mobile);}
+      .reviews-track-wrap::-webkit-scrollbar { display:none; }
+      .reviews-track { width:max-content; gap: 16px; }
+      .review-card{min-width:85vw; max-width:85vw; scroll-snap-align: center; white-space:normal;}
+      .reviews-nav { display: none; } /* Ocultar botones en móvil, el usuario desliza */
+    }
 
     /* MAPA */
     .map-section{background:var(--negro-carbon);padding:0 0 var(--space-10);text-align:center;}
@@ -262,16 +238,16 @@
     @media(max-width:1024px){footer{padding:var(--space-8) var(--grid-margin-tablet) var(--space-5);}.footer-top{grid-template-columns:1fr 1fr;gap:var(--space-6);}}
     @media(max-width:768px){footer{padding:var(--space-7) var(--grid-margin-mobile) var(--space-5);}.footer-top{grid-template-columns:1fr;gap:var(--space-6);}.footer-bottom{flex-direction:column;align-items:flex-start;}}
 
-    /* RESPONSIVE */
-    @media(max-width:1024px){nav{padding:0 var(--grid-margin-tablet);}footer{padding:var(--space-7) var(--grid-margin-tablet);}}
-    @media(max-width:768px){
-      nav{padding:0 var(--grid-margin-mobile);}
-      .nav-search-btn,.nav-menu-label,#soundLabel,.nav-lang{display:none;}
-      footer{padding:var(--space-6) var(--grid-margin-mobile);flex-direction:column;align-items:flex-start;gap:var(--space-5);}
-    }
-
+    /* RESPONSIVE GLOBAL */
     *{cursor:none !important;}
     #cur{position:fixed;width:11px;height:11px;background:#005C33;border-radius:50%;pointer-events:none;z-index:99999;box-shadow:0 0 6px rgba(0,0,0,0.35);top:0;left:0;will-change:transform;}
+    
+    /* DESACTIVAR CURSOR EN MÓVIL */
+    @media(max-width:768px){
+      *{cursor: auto !important;}
+      #cur{display: none !important;}
+    }
+
     #preloader{position:fixed;inset:0;background:#005C33;z-index:99999;display:flex;align-items:center;justify-content:center;transition:opacity 1.2s ease,visibility 1.2s ease;}
     #preloader.hide{opacity:0;visibility:hidden;}
     #preloader-logo{width:clamp(200px,32vw,440px);object-fit:contain;opacity:0;transform:scale(0.92);transition:opacity 1.4s ease,transform 1.4s cubic-bezier(0.16,1,0.3,1);}
@@ -319,7 +295,7 @@
   <h1 style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(1px, 1px, 1px, 1px);">Victoria Regia: Santuario y Experiencias en el Amazonas Colombiano</h1>
 
   <div id="preloader">
-    <img id="preloader-logo" src="assets/Logo-blanco.png" alt="Victoria Regia">
+    <img id="preloader-logo" src="assets/Logo-BLANCO.png" alt="Victoria Regia">
   </div>
 
   <nav id="navbar">
@@ -334,7 +310,7 @@
         Inicio
       </button>
     </div>
-    <div class="nav-center"><img id="navLogo" src="assets/Logo-verde.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
+    <div class="nav-center"><img id="navLogo" src="assets/Logo-VERDE.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
     <div class="nav-right">
       <button class="nav-sound" id="soundBtn">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#005C33" stroke-width="1.5" stroke-linecap="round">
@@ -372,7 +348,7 @@
   <div id="secHome">
     <div class="hero-wrapper" id="home">
       <div class="hero-sticky">
-        <div class="layer layer-logo" id="layerLogo"><img src="assets/Logo-verde.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
+        <div class="layer layer-logo" id="layerLogo"><img src="assets/Logo-VERDE.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
         <div class="layer layer-mountains" id="layerMountains"><img src="assets/Montan_as.png" alt=""></div>
         <div class="layer lf lf1" id="lf1"><img src="assets/capa1.png" alt=""></div>
         <div class="layer lf lf2" id="lf2"><img src="assets/capa2.png" alt=""></div>
@@ -507,12 +483,19 @@
         </div>
           </div>
           <div class="gallery-carousel" id="galCarousel">
-            <div class="gallery-carousel-row"><div class="gallery-carousel-track" id="galTrack1"><div class="gc-item"><img src="assets/galeria/IMG-1.jpg" alt="Galería 1" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-1</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-2.jpg" alt="Galería 2" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-2</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-3.jpg" alt="Galería 3" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-3</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-4.jpg" alt="Galería 4" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-4</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-5.jpg" alt="Galería 5" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-5</span></div></div></div></div>
-            <div class="gallery-carousel-row"><div class="gallery-carousel-track" id="galTrack2"><div class="gc-item"><img src="assets/galeria/IMG-6.jpg" alt="Galería 6" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-6</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-7.jpg" alt="Galería 7" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-7</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-8.jpg" alt="Galería 8" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-8</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-9.jpg" alt="Galería 9" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-9</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-10.jpg" alt="Galería 10" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-10</span></div></div></div></div>
-            <div class="gallery-carousel-row"><div class="gallery-carousel-track" id="galTrack3"><div class="gc-item"><img src="assets/galeria/IMG-11.jpg" alt="Galería 11" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-11</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-12.jpg" alt="Galería 12" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-12</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-1.jpg" alt="Galería 1" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-1</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-2.jpg" alt="Galería 2" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-2</span></div></div><div class="gc-item"><img src="assets/galeria/IMG-3.jpg" alt="Galería 3" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-3</span></div></div></div></div>
-            <div class="gallery-carousel-nav">
-              <button id="galPrev">←</button>
-              <button id="galNext">→</button>
+            <div class="gallery-carousel-track" id="galTrack1">
+              <div class="gc-item"><img src="assets/galeria/IMG-1.jpg" alt="Galería 1" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-1</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-2.jpg" alt="Galería 2" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-2</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-3.jpg" alt="Galería 3" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-3</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-4.jpg" alt="Galería 4" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-4</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-5.jpg" alt="Galería 5" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-5</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-6.jpg" alt="Galería 6" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-6</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-7.jpg" alt="Galería 7" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-7</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-8.jpg" alt="Galería 8" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-8</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-9.jpg" alt="Galería 9" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-9</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-10.jpg" alt="Galería 10" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-10</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-11.jpg" alt="Galería 11" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-11</span></div></div>
+              <div class="gc-item"><img src="assets/galeria/IMG-12.jpg" alt="Galería 12" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'"><div class="gal-placeholder"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="21 15 16 10 5 21"/></svg><span>IMG-12</span></div></div>
             </div>
           </div>
         </div>
@@ -562,7 +545,7 @@
     <footer id="contacto">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="assets/Logo-blanco.png" alt="Victoria Regia">
+          <img src="assets/Logo-BLANCO.png" alt="Victoria Regia">
           <p>Un santuario en el corazón del Amazonas colombiano, donde la naturaleza sigue siendo la protagonista.</p>
           <div class="footer-social">
             <a href="#" aria-label="Instagram">📷</a>
@@ -687,7 +670,7 @@
     <footer>
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="assets/Logo-blanco.png" alt="Victoria Regia">
+          <img src="assets/Logo-BLANCO.png" alt="Victoria Regia">
           <p>Un santuario en el corazón del Amazonas colombiano.</p>
           <div class="footer-social">
             <a href="#" aria-label="Instagram">📷</a>
@@ -772,11 +755,13 @@
       document.querySelector('.nav-reserve').click();
     });
 
-    // Scroll directo a galería (punto del parallax donde aparece)
+    // Scroll directo a galería
     function scrollToGallery() {
       function doScroll() {
         const vh = window.innerHeight;
-        const capa2Start = vh*1.2, capaDur = vh*0.9;
+        const isMobile = window.innerWidth <= 768;
+        const capaDur = isMobile ? vh*0.45 : vh*0.9;
+        const capa2Start = vh*1.2;
         const pausaEnd = capa2Start + 6*capaDur + vh*1.2;
         window.scrollTo({top: pausaEnd + vh*0.5, behavior:'smooth'});
       }
@@ -788,11 +773,10 @@
       }
     }
 
-    // Función scroll a sección en home — sin saltar al top
+    // Función scroll a sección
     function scrollToSection(id) {
       const inHome = secHome.style.display !== 'none' && secExp.classList.contains('active') === false;
       if (!inHome) {
-        // Estamos en experiencias: volver a home sin scroll to top, luego ir a sección
         goToHome();
         setTimeout(() => {
           const el = document.getElementById(id);
@@ -829,7 +813,6 @@
       a.addEventListener('click', e => { e.preventDefault(); goToExp('exp-' + a.dataset.exp); });
     });
 
-    // Footer de secExperiencias
     document.querySelectorAll('.exp-footer-home').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goToHome(); }));
     document.querySelectorAll('.exp-footer-exp').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goToExp(null); window.scrollTo({top:0,behavior:'instant'}); }));
     document.querySelectorAll('.exp-footer-gal').forEach(a => a.addEventListener('click', e => { e.preventDefault(); goToHome(); setTimeout(scrollToGallery, 80); }));
@@ -839,7 +822,7 @@
   </script>
 
   <script>
-    /* PARALLAX */
+    /* PARALLAX OPTIMIZADO PARA MÓVIL */
     const wrapper     = document.getElementById('home');
     const logo        = document.getElementById('layerLogo');
     const mountains   = document.getElementById('layerMountains');
@@ -866,15 +849,16 @@
 
     function onScroll(){
       const s=smoothY,vh=window.innerHeight;
+      const isMobile=window.innerWidth<=768;
+      const capaDur=isMobile?vh*0.45:vh*0.9; /* Menos scroll en móvil */
+
       if(!navbar.classList.contains('exp-mode'))
         navbar.classList.toggle('scrolled',s>60);
 
-      // Logo
       const logoFade=clamp(1-s/(vh*0.2),0,1);
       logo.style.opacity=logoFade;
       logo.style.transform=`translateY(${clamp(s/(vh*0.2),0,1)*-3}vh)`;
 
-      // Cards experiencias
       const capa2Start=vh*1.2;
       const showP=clamp((s-vh*0.15)/(vh*0.13),0,1);
       const hideP=clamp((s-capa2Start)/(vh*0.25),0,1);
@@ -883,24 +867,19 @@
       heroContent.style.transform=`translateY(${(1-showP)*16}px)`;
       heroContent.style.pointerEvents=op>0.1?'all':'none';
 
-      // Montañas + capa1
       const syncP=prog(s,0,vh*1.2);
       mountains.style.transform=`translateY(${-syncP*100}%)`;
       layers[0].style.transform=`translateY(${(1-syncP)*100}%)`;
 
-      // Capas 2-7
-      const capaDur=vh*0.9;
       for(let i=1;i<=6;i++){
         const st=capa2Start+(i-1)*capaDur;
         layers[i].style.transform=`translateY(${ty(prog(s,st,st+capaDur))}%)`;
       }
 
-      // Capa final
       const pausaEnd=capa2Start+6*capaDur+vh*1.2;
-      const finalDur=vh*0.9;
+      const finalDur=isMobile?vh*0.6:vh*0.9;
       finalL.style.transform=`translateY(${ty(prog(s,pausaEnd,pausaEnd+finalDur))}%)`;
 
-      // Galería: aparece cuando capa final está visible, desaparece al final
       const galStart = pausaEnd;
       const galInP   = clamp((s - galStart) / (finalDur * 0.3), 0, 1);
       const wrapH    = parseFloat(wrapper.style.height) || 0;
@@ -913,7 +892,6 @@
         galEl.style.pointerEvents = galOp > 0.1 ? 'all' : 'none';
       }
 
-      // Stories — ocultar si heroContent visible
       const storiesActive=op<0.05;
       const storyDefs=[
         {start:capa2Start,            end:capa2Start+capaDur},
@@ -924,18 +902,27 @@
         {start:capa2Start+5*capaDur,  end:capa2Start+6*capaDur+vh*1.2},
       ];
       stories.forEach((el,i)=>{
-        if(!storiesActive){el.style.opacity=0;return;}
+        if(!storiesActive){
+          el.style.opacity=0;
+          el.style.pointerEvents='none'; // Fix Botón fantasma
+          return;
+        }
         const{start,end}=storyDefs[i];
         const dur=end-start;
         const inP =clamp((s-start)/(dur*0.12),0,1);
         const outP=clamp((s-(start+dur*0.60))/(dur*0.15),0,1);
-        el.style.opacity=inP*(1-outP);
+        const overlayOp=inP*(1-outP);
+        el.style.opacity=overlayOp;
+        el.style.pointerEvents=overlayOp>0.1?'all':'none'; // Fix Botón fantasma
       });
     }
 
     function setWrapperHeight(){
       const vh=window.innerHeight;
-      wrapper.style.height=(vh*0.2+vh*1.4+vh*6*0.9+vh*1.2+vh*0.9+vh*0.8+vh*0.5+vh)+'px';
+      const isMobile=window.innerWidth<=768;
+      const cDur=isMobile?vh*0.45:vh*0.9;
+      const fDur=isMobile?vh*0.6:vh*0.9;
+      wrapper.style.height=(vh*0.2+vh*1.4+cDur*6+vh*1.2+fDur+vh*0.8+vh*0.5+vh)+'px';
     }
     setWrapperHeight();
     window.addEventListener('resize',setWrapperHeight);
@@ -964,36 +951,10 @@
 
   <script>
     /* CURSOR + AUDIO + PRELOADER */
-    /* CARRUSEL GALERÍA MOBILE — 3 filas sincronizadas */
-    (function(){
-      const trackIds = ['galTrack1','galTrack2','galTrack3'];
-      const tracks = trackIds.map(id => document.getElementById(id)).filter(Boolean);
-      if (!tracks.length) return;
-      let idx = 0;
-      function cardW(){
-        const first = tracks[0].querySelector('.gc-item');
-        return first ? first.offsetWidth + 10 : 0;
-      }
-      function go(n){
-        const items0 = tracks[0].querySelectorAll('.gc-item');
-        const total = items0.length;
-        idx = ((n % total) + total) % total;
-        const w = cardW();
-        tracks.forEach((t,i) => {
-          // filas pares van en dirección contraria para efecto paralaje
-          const dir = i % 2 === 0 ? 1 : -1;
-          t.style.transform = `translateX(${dir * -idx * w}px)`;
-        });
-      }
-      const prev = document.getElementById('galPrev');
-      const next = document.getElementById('galNext');
-      if (prev) prev.addEventListener('click', () => go(idx - 1));
-      if (next) next.addEventListener('click', () => go(idx + 1));
-      window.addEventListener('resize', () => go(idx));
-    })();
-
     const cur=document.getElementById('cur');
-    document.addEventListener('mousemove',e=>{cur.style.transform=`translate(${e.clientX-5}px,${e.clientY-5}px)`;});
+    document.addEventListener('mousemove',e=>{
+      if(window.innerWidth>768){cur.style.transform=`translate(${e.clientX-5}px,${e.clientY-5}px)`;}
+    });
 
     const audio=document.getElementById('ambientAudio');
     const soundBtn=document.getElementById('soundBtn');
@@ -1002,8 +963,18 @@
     const wave2=document.getElementById('soundWave2');
     let muted=false;
     audio.volume=0.4;
-    function startAudio(){audio.play().catch(()=>{});document.removeEventListener('click',startAudio);}
+    
+    // Auto-play al primer roce o clic (Máximo permitido por navegadores)
+    function startAudio(){
+      audio.play().catch(()=>{});
+      document.removeEventListener('click',startAudio);
+      document.removeEventListener('touchstart',startAudio);
+      document.removeEventListener('scroll',startAudio);
+    }
     document.addEventListener('click',startAudio);
+    document.addEventListener('touchstart',startAudio,{passive:true});
+    document.addEventListener('scroll',startAudio,{passive:true});
+
     function setMuted(m){muted=m;audio.muted=muted;soundLabel.textContent=muted?'Sin sonido':'Sonido';wave1.style.display=muted?'none':'';wave2.style.display=muted?'none':'';}
     soundBtn.addEventListener('click',()=>setMuted(!muted));
 
@@ -1048,6 +1019,9 @@
     }
 
     function initCarousel() {
+      // En móvil usamos scroll-snap (deslizar nativo), en escritorio botones
+      if(window.innerWidth <= 768) return; 
+      
       const track = document.getElementById('reviewsTrack');
       const wrap  = track.parentElement;
       const cards = track.querySelectorAll('.review-card');
@@ -1055,7 +1029,6 @@
       let cur = 0;
 
       function maxIndex() {
-        // cuántas cards caben en el contenedor visible
         const cardW = cards[0].offsetWidth + 24;
         const visible = Math.floor(wrap.offsetWidth / cardW);
         return Math.max(0, cards.length - visible);
@@ -1069,10 +1042,9 @@
 
       document.getElementById('revPrev').onclick = () => go(cur - 1);
       document.getElementById('revNext').onclick = () => go(cur + 1);
-      window.addEventListener('resize', () => go(cur));
+      window.addEventListener('resize', () => {if(window.innerWidth > 768) go(cur);});
     }
 
-    // Intentar API — fallback si falla CORS
     window.handleReviews = function(data) {
       if (data.status === 'OK' && data.result) {
         const {rating, user_ratings_total, reviews} = data.result;
