@@ -109,7 +109,7 @@
     .exp-btn{display:block;margin:var(--space-6) auto 0;padding:13px 32px;background:var(--verde-selva);color:white;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:background 0.3s;width:fit-content;}
     .exp-btn:hover{background:var(--verde-esmeralda);}
 
-    /* RESPONSIVE MÓVIL (ARQUITECTURA HÍBRIDA) */
+    /* RESPONSIVE MÓVIL (ARQUITECTURA HÍBRIDA GLOBAL) */
     @media(max-width:1024px){
       .exp-cards{grid-template-columns:repeat(2,1fr);}
       .hero-content{padding:var(--space-8) var(--grid-margin-tablet);}
@@ -134,44 +134,47 @@
       .hero-sticky::before { display: none; }
       #wrapper { height: auto !important; }
       
-      /* Encendemos la versión Landing Ligera */
+      /* IMAGEN DE FONDO GLOBAL PARA MÓVIL 
+         Aquí aplicamos tu imagen 'fondo-movil.jpg' a TODO el contenedor
+      */
+      #secHome {
+        background-image: url('assets/fondo-movil.jpg');
+        background-size: 100% auto; /* Crece hacia abajo ocupando el 100% del ancho */
+        background-position: top center;
+        background-repeat: no-repeat;
+        background-color: #05100a; /* Respaldo oscuro por si la página es más larga que la foto */
+      }
+      
+      /* Encendemos los bloques móviles asegurándonos que sean TRANSPARENTES */
       .mobile-only-hero {
-        display: block;
-        width: 100%;
-        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 65vh; /* Deja libre el espacio del río de la imagen de fondo */
         position: relative;
-        background: var(--verde-selva);
-      }
-      .mobile-only-hero img.m-bg {
-        width: 100%; height: 100%;
-        object-fit: cover;
-        object-position: bottom center;
-      }
-      .mobile-only-hero .m-logo {
-        position: absolute;
-        top: 25vh; left: 0; width: 100%;
-        display: flex; justify-content: center;
-        z-index: 10;
+        padding-top: 25vh;
+        background: transparent; /* Transparente! */
       }
       .mobile-only-hero .m-logo img { width: clamp(200px, 60vw, 300px); object-fit: contain; }
 
       .mobile-only-story {
         display: flex;
         flex-direction: column;
-        gap: 5rem;
-        padding: 5rem var(--grid-margin-mobile);
-        background: linear-gradient(to bottom, #005C33, #003a20);
+        gap: 6rem; /* Separación entre textos de la historia */
+        padding: 4rem var(--grid-margin-mobile) 5rem;
+        background: transparent; /* Transparente para dejar ver tu fondo */
         text-align: center;
       }
       
-      /* Ajuste de los bloques globales a flujo normal vertical */
+      /* Ajuste de TODAS las secciones a fondo transparente en móvil */
       .hero-content {
         position: relative !important;
         opacity: 1 !important;
         transform: none !important;
         pointer-events: all !important;
         padding: 4rem 0 !important;
-        background: #003a20; /* Conecta con el gradiente de arriba */
+        background: transparent !important; /* Cero verde sólido */
         justify-content:flex-start;
       }
       .gallery-overlay {
@@ -179,8 +182,10 @@
         opacity: 1 !important;
         pointer-events: all !important;
         padding: 4rem 0 2rem !important;
-        background: #003a20;
+        background: transparent !important; /* Cero verde sólido */
       }
+      .reviews-section { background: transparent !important; }
+      .map-section { background: transparent !important; }
 
       .hero-content-label{font-size:9px;margin-bottom:var(--space-2);}
       .hero-content-title{font-size:1.4rem;margin-bottom:var(--space-4);}
@@ -428,7 +433,6 @@
     
     <div class="mobile-only-hero">
       <div class="m-logo"><img src="assets/logo-blanco.png" alt="Victoria Regia"></div>
-      <img class="m-bg" src="assets/fondo-movil.jpg" alt="Santuario Amazonas">
       <div class="scroll-indicator" style="bottom: 2rem;">
         <div class="scroll-mouse"></div>
         <span>Scroll</span>
@@ -871,7 +875,6 @@
     drawerHome.addEventListener('click', e => { e.preventDefault(); goToHome(); closeDrawer(); });
     drawerExpLnk.addEventListener('click', e => { e.preventDefault(); goToExp(null); closeDrawer(); });
     
-    // Asignar el botón de contacto de la historia en desktop
     const storyContactBtn = document.getElementById('storyContactBtn');
     if (storyContactBtn) {
       storyContactBtn.addEventListener('click', () => {
@@ -883,7 +886,6 @@
       card.addEventListener('click', () => goToExp('exp-' + card.dataset.exp));
     });
 
-    // Scroll directo a galería
     function scrollToGallery() {
       function doScroll() {
         const vh = window.innerHeight;
@@ -920,13 +922,11 @@
       }
     }
 
-    // Drawer listeners
     document.getElementById('drawerGal').addEventListener('click', e => { e.preventDefault(); closeDrawer(); scrollToGallery(); });
     document.getElementById('drawerReviews').addEventListener('click', e => { e.preventDefault(); closeDrawer(); scrollToSection('reviews-anchor'); });
     document.getElementById('drawerMap').addEventListener('click',     e => { e.preventDefault(); closeDrawer(); scrollToSection('map-anchor'); });
     document.getElementById('drawerContact').addEventListener('click', e => { e.preventDefault(); closeDrawer(); scrollToSection('contacto'); });
 
-    // Footer nav
     const fHome = document.getElementById('footerHome');
     const fExp  = document.getElementById('footerExp');
     const fGal  = document.getElementById('footerGal');
@@ -985,7 +985,7 @@
       if(!navbar.classList.contains('exp-mode'))
         navbar.classList.toggle('scrolled',s>60);
 
-      // Si es móvil, cortamos la ejecución de matemáticas pesadas de inmediato.
+      // Bypass de matemáticas en celular
       if(isMobile) return;
 
       const logoFade=clamp(1-s/(vh*0.2),0,1);
@@ -1062,7 +1062,6 @@
       const vh=window.innerHeight;
       const isMobile=window.innerWidth<=768;
       
-      // En móvil, la altura se rige por el contenido natural, no por scroll matemático
       if(isMobile) {
         wrapper.style.height = 'auto';
         return;
