@@ -134,14 +134,15 @@
       .hero-sticky::before { display: none; }
       #wrapper { height: auto !important; }
       
-      /* IMAGEN DE FONDO GLOBAL PARA MÓVIL (EXPANDIDA DE PRINCIPIO A FIN) */
+      /* IMAGEN DE FONDO PERFECTA PARA NUEVO LIENZO DE 1080x3100px */
       #secHome {
         background-image: url('assets/fondo-movil.jpg');
-        background-size: cover; /* ¡Aquí está la magia! Se expande hacia abajo sin deformarse */
+        background-size: 100% auto; /* Ajusta el ancho al 100% del teléfono y calcula el largo perfecto */
         background-position: top center;
         background-repeat: no-repeat;
-        background-attachment: scroll; /* Sigue el ritmo del dedo al deslizar */
-      }
+        background-attachment: scroll; /* Sigue el deslizamiento natural del dedo */
+        background-color: transparent; /* Permite que se vea toda tu ilustración sin parches */
+      }  
       
       /* Encendemos los bloques móviles asegurándonos que sean TRANSPARENTES */
       .mobile-only-hero {
