@@ -14,7 +14,7 @@
       --sombra-sutil:rgba(17,19,24,0.08);
       --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;
       --space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;--space-10:128px;
-      --grid-margin-desktop:80px;--grid-margin-tablet:32px;--grid-margin-mobile:16px;
+      --grid-margin-desktop:80px;--grid-margin-tablet:32px;--grid-margin-mobile:20px;
     }
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     html{scroll-behavior:smooth;}
@@ -105,16 +105,29 @@
     .exp-card-desc{font-family:'Poppins',sans-serif;font-size:11px;color:rgba(255,255,255,0.55);line-height:1.7;}
     .exp-btn{display:block;margin:var(--space-6) auto 0;padding:13px 32px;background:var(--verde-selva);color:white;font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:background 0.3s;width:fit-content;}
     .exp-btn:hover{background:var(--verde-esmeralda);}
-    @media(max-width:1024px){.exp-cards{grid-template-columns:repeat(2,1fr);}.hero-content{padding:var(--space-8) var(--grid-margin-tablet);}}
+
+    /* RESPONSIVE MÓVIL (NAV Y CARDS) */
+    @media(max-width:1024px){
+      .exp-cards{grid-template-columns:repeat(2,1fr);}
+      .hero-content{padding:var(--space-8) var(--grid-margin-tablet);}
+      nav{padding:0 var(--grid-margin-tablet);}
+    }
     @media(max-width:768px){
+      /* Barra Navegación Móvil */
+      nav{padding:0 var(--grid-margin-mobile); grid-template-columns: 1fr auto 1fr;}
+      .nav-left{gap:0; justify-content:flex-start;}
+      .nav-right{gap:12px; justify-content:flex-end;}
+      .nav-search-btn, .nav-menu-label, #soundLabel, .nav-lang {display:none;}
+      .nav-reserve{padding:8px 14px; font-size:9px; letter-spacing:1px;}
+      .nav-center img{height:24px;}
+      
       .hero-content{padding:0;justify-content:center;}
       .hero-content-label{font-size:9px;margin-bottom:var(--space-2);}
       .hero-content-title{font-size:1.4rem;margin-bottom:var(--space-4);}
-      /* TAMAÑO REDUCIDO EN MÓVIL PARA EXPERIENCIAS */
       .exp-cards{grid-template-columns:repeat(4, 68vw); gap:16px; overflow-x:auto; scroll-snap-type: x mandatory; padding:0 var(--grid-margin-mobile) var(--space-3); margin:0; width:100%; scrollbar-width:none; -webkit-overflow-scrolling:touch;}
       .exp-cards::-webkit-scrollbar{display:none;}
       .exp-card{scroll-snap-align: center;}
-      .exp-card-img-wrap{height: 260px;} 
+      .exp-card-img-wrap{height: 240px;} 
       .exp-card-body{padding:var(--space-3) var(--space-3) var(--space-5);}
       .exp-card-title{font-size:11px;margin-bottom:var(--space-2);}
       .exp-card-desc{font-size:10px;line-height:1.6;}
@@ -171,7 +184,6 @@
       .gallery-overlay-header{padding:0 var(--grid-margin-mobile);}
       .gallery-mosaic{display:none;}
       
-      /* UNIFICADO EN 1 FILA DESLIZABLE */
       .gallery-carousel { display:block; width:100%; overflow-x:auto; scroll-snap-type: x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding-bottom:10px; }
       .gallery-carousel::-webkit-scrollbar { display:none; }
       .gallery-carousel-track { display:flex; gap:12px; width:max-content; padding:0 var(--grid-margin-mobile); }
@@ -187,8 +199,8 @@
     .reviews-score-detail{text-align:left;}
     .reviews-stars-big{color:#F5C842;font-size:18px;letter-spacing:2px;display:block;margin-bottom:4px;}
     .reviews-count{font-family:'Poppins',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);}
-    .reviews-track-wrap{overflow:hidden;}
-    .reviews-track{display:flex;gap:var(--space-5);transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);}
+    .reviews-track-wrap{overflow:hidden; width:100%;}
+    .reviews-track{display:flex; gap:var(--space-5); transition:transform 0.5s cubic-bezier(0.16,1,0.3,1);}
     .review-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:var(--space-6);min-width:300px;max-width:300px;text-align:left;flex-shrink:0;}
     .review-card-stars{color:#F5C842;font-size:13px;margin-bottom:var(--space-3);letter-spacing:2px;}
     .review-card-text{font-family:'Poppins',sans-serif;font-size:13px;color:rgba(255,255,255,0.7);line-height:1.75;margin-bottom:var(--space-4);display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
@@ -198,15 +210,22 @@
     .reviews-nav button:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.5);}
     .reviews-google-link{display:inline-block;margin-top:var(--space-6);color:rgba(255,255,255,0.3);font-family:'Poppins',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:color 0.3s;}
     .reviews-google-link:hover{color:rgba(255,255,255,0.7);}
+    
     @media(max-width:1024px){.reviews-section{padding:var(--space-9) var(--grid-margin-tablet);}}
     @media(max-width:768px){
-      .reviews-section{padding:var(--space-8) 0;} /* Removido padding lateral para scroll natural */
+      .reviews-section{padding:var(--space-8) 0;}
       .reviews-rating-global{padding:0 var(--grid-margin-mobile);}
-      .reviews-track-wrap{overflow-x:auto; scroll-snap-type: x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch; padding: 0 var(--grid-margin-mobile);}
+      .reviews-track-wrap{
+        overflow-x:auto; 
+        scroll-snap-type: x mandatory; 
+        scrollbar-width:none; 
+        -webkit-overflow-scrolling:touch; 
+        padding: 0 var(--grid-margin-mobile) 20px var(--grid-margin-mobile);
+      }
       .reviews-track-wrap::-webkit-scrollbar { display:none; }
-      .reviews-track { width:max-content; gap: 16px; }
-      .review-card{min-width:85vw; max-width:85vw; scroll-snap-align: center; white-space:normal;}
-      .reviews-nav { display: none; } /* Ocultar botones en móvil, el usuario desliza */
+      .reviews-track { width:max-content; gap:16px; padding-right:var(--grid-margin-mobile); }
+      .review-card{min-width:82vw; max-width:82vw; scroll-snap-align: center; white-space:normal;}
+      .reviews-nav { display: none; }
     }
 
     /* MAPA */
@@ -295,7 +314,7 @@
   <h1 style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(1px, 1px, 1px, 1px);">Victoria Regia: Santuario y Experiencias en el Amazonas Colombiano</h1>
 
   <div id="preloader">
-    <img id="preloader-logo" src="assets/Logo-BLANCO.png" alt="Victoria Regia">
+    <img id="preloader-logo" src="assets/logo-blanco.png" alt="Victoria Regia">
   </div>
 
   <nav id="navbar">
@@ -310,7 +329,7 @@
         Inicio
       </button>
     </div>
-    <div class="nav-center"><img id="navLogo" src="assets/Logo-VERDE.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
+    <div class="nav-center"><img id="navLogo" src="assets/logo-verde.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
     <div class="nav-right">
       <button class="nav-sound" id="soundBtn">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#005C33" stroke-width="1.5" stroke-linecap="round">
@@ -348,7 +367,7 @@
   <div id="secHome">
     <div class="hero-wrapper" id="home">
       <div class="hero-sticky">
-        <div class="layer layer-logo" id="layerLogo"><img src="assets/Logo-VERDE.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
+        <div class="layer layer-logo" id="layerLogo"><img src="assets/logo-verde.png" alt="Victoria Regia" onerror="this.style.opacity='0'"></div>
         <div class="layer layer-mountains" id="layerMountains"><img src="assets/Montan_as.png" alt=""></div>
         <div class="layer lf lf1" id="lf1"><img src="assets/capa1.png" alt=""></div>
         <div class="layer lf lf2" id="lf2"><img src="assets/capa2.png" alt=""></div>
@@ -545,7 +564,7 @@
     <footer id="contacto">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="assets/Logo-BLANCO.png" alt="Victoria Regia">
+          <img src="assets/logo-blanco.png" alt="Victoria Regia">
           <p>Un santuario en el corazón del Amazonas colombiano, donde la naturaleza sigue siendo la protagonista.</p>
           <div class="footer-social">
             <a href="#" aria-label="Instagram">📷</a>
@@ -670,7 +689,7 @@
     <footer>
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="assets/Logo-BLANCO.png" alt="Victoria Regia">
+          <img src="assets/logo-blanco.png" alt="Victoria Regia">
           <p>Un santuario en el corazón del Amazonas colombiano.</p>
           <div class="footer-social">
             <a href="#" aria-label="Instagram">📷</a>
@@ -1020,9 +1039,12 @@
 
     function initCarousel() {
       // En móvil usamos scroll-snap (deslizar nativo), en escritorio botones
-      if(window.innerWidth <= 768) return; 
-      
       const track = document.getElementById('reviewsTrack');
+      if(window.innerWidth <= 768) {
+        track.style.transform = 'none'; // Reseteamos por si se achicó la ventana desde escritorio
+        return; 
+      }
+      
       const wrap  = track.parentElement;
       const cards = track.querySelectorAll('.review-card');
       if (!cards.length) return;
